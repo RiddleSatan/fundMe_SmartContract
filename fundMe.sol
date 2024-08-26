@@ -24,9 +24,14 @@ pragma solidity >=0.8.26;
 import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
 
 contract FundMe {
+    uint256 minimumUSD = 5e18;
+
     function fund() public payable {
         // function withdraw() public {}
-        require(msg.value > 1e18, "didnt send enough ETH");
+        require(
+            conversionRate(msg.value) > minimumUSD,
+            "didnt send enough ETH"
+        );
     }
 
     function getPrice() public view returns (uint256) {
@@ -38,18 +43,21 @@ contract FundMe {
         (
             ,
             /* uint80 roundID */
-            int256 price,
+            int256 price, /*uint startedAt*/
             ,
             ,
 
-        ) = /*uint startedAt*/
-            /*uint timeStamp*/
+        ) = /*uint timeStamp*/
             /*uint80 answeredInRound*/
             priceFeed.latestRoundData();
         return uint256(price * 1e18); //1 ETH = 1e9 Gwei  = 1e18 Wei
     }
 
-    function conversionRate() public {}
+    function conversionRate(uint256 _ethAmt) public view returns (uint256) {
+        uint256 ethPrice = getPrice();
+        uint256 ethAmtinUSD = (ethPrice * _ethAmt) / 1e18;
+        return ethAmtinUSD;
+    }
 
     function getVersion() public view returns (uint256) {
         return
