@@ -4,53 +4,7 @@
 	},
 	"language": "Solidity",
 	"output": {
-		"abi": [
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "funder",
-						"type": "address"
-					}
-				],
-				"name": "addressToAmountFunded",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "amtFunded",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "fund",
-				"outputs": [],
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "funder",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			}
-		],
+		"abi": [],
 		"devdoc": {
 			"kind": "dev",
 			"methods": {},
@@ -64,7 +18,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"fundMe.sol": "FundMe"
+			"priceConvertor.sol": "PriceConvertor"
 		},
 		"evmVersion": "cancun",
 		"libraries": {},
@@ -84,14 +38,6 @@
 			"urls": [
 				"bzz-raw://6d39e11b1dc7b9b8ccdabbc9be442ab7cda4a81c748f57e316dcb1bcb4a28bf9",
 				"dweb:/ipfs/QmaG6vz6W6iEUBsbHSBob5mdcitYxWjoygxREHpsJHfWrS"
-			]
-		},
-		"fundMe.sol": {
-			"keccak256": "0x74f206333bc76903b4d08309326a109813731fd3a1875a0b61d197eaeb922519",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://c9c24174eac88d2a87774d1d23de6b0381f58fe07991f4cc1c7d9c38d0516a40",
-				"dweb:/ipfs/Qma5pFJUZ9HFGF6vQ1Fm7Q5Mkp1h3PiYjDfLT3U58zZPpJ"
 			]
 		},
 		"priceConvertor.sol": {
