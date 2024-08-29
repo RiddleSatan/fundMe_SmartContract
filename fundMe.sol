@@ -9,7 +9,7 @@ contract FundMe {
 
     uint256 minimumUSD = 5e18;
 
-    address[] public funder;
+    address[] public funders;
     mapping(address => uint256) public addressToAmountFunded;
 
     function fund() public payable {
@@ -18,9 +18,21 @@ contract FundMe {
             msg.value.conversionRate() > minimumUSD, //in this line we can see we didnt pass a value in conversionRate this is because msg.value automaticalllly used  used for the initial argument  of the conversionRate() function if there is another argument that is accepted then we pass the second argument inside the conversionRate() function
             "didnt send enough ETH"
         );
-        funder.push(msg.sender);
-        addressToAmountFunded[msg.sender] =
-            addressToAmountFunded[msg.sender] +
-            msg.value;
+        funders.push(msg.sender);
+        addressToAmountFunded[msg.sender] += msg.value;
+    }
+
+    function withDraw() public {
+        for (
+            uint256 fundersIndex = 0;
+            fundersIndex <= funders.length;
+            fundersIndex++
+        ) {
+            address funder = funders[fundersIndex];
+            addressToAmountFunded[funder] = 0;
+        }
+
+        //resetting a array
+        funders = new address[](0); // this reason why we use address cuz solidity is strictly typed and we have to defined the type with the new [] declaration of the array
     }
 }
