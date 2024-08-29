@@ -44,7 +44,7 @@ contract FundMe {
         bool sendSuccess = payable(msg.sender).send(address(this).balance);
         require(sendSuccess, "there was an error: send failed"); //if sendSuccess is False then the function will revert else it will continue
 
-        //call : no Limit Forwards all the Gas no Limit
+        //call : no Limit Forwards all the Gas 
         (
             bool callSuccess, /*bytes memory dataReturned*/
 
