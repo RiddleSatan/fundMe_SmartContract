@@ -34,5 +34,21 @@ contract FundMe {
 
         //resetting a array
         funders = new address[](0); // this reason why we use address cuz solidity is strictly typed and we have to defined the type with the new [] declaration of the array
+
+        //transfer :Limit of 2300 Gas sends an error if fails
+        // ## msg.sender is of type Address
+        // ## payable(msg.sender) is of type payable address
+        payable(msg.sender).transfer(address(this).balance);
+
+        //send :Limit of 2300 Gas
+        bool sendSuccess = payable(msg.sender).send(address(this).balance);
+        require(sendSuccess, "there was an error: send failed"); //if sendSuccess is False then the function will revert else it will continue
+
+        //call : no Limit Forwards all the Gas no Limit
+        (
+            bool callSuccess, /*bytes memory dataReturned*/
+
+        ) = payable(msg.sender).call{value: address(this).balance}("");
+        require(callSuccess, "call failed");
     }
 }
