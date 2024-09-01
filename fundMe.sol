@@ -4,6 +4,8 @@ pragma solidity >=0.8.26;
 
 import {PriceConvertor} from "./priceConvertor.sol";
 
+error notOwner();
+
 contract FundMe {
     using PriceConvertor for uint256; //this is important line to add inorder to use the function of the library we created which is created
 
@@ -69,7 +71,19 @@ contract FundMe {
 
     modifier onlyOwner() {
         // so a modifer is something that we can use to create a functionality and then add that functionality to anyfunction we create
-        require(i_owner == msg.sender, "You are not the Owner");
+        // require(i_owner == msg.sender, "You are not the Owner");//alternate and better way through which we save gas
+        if (msg.sender != i_owner) {
+            revert notOwner(); //coustom Error handling gas efficient way
+        }
+
         _; // this denotes basically the rest of your code and it means the he require methode above will execute first then the rest of the code if the conditon is satisfied else it will revert back
     }
+
+    receive() external payable {
+        fund();
+     }
+
+     fallback() external payable {
+        fund();
+      }
 }
